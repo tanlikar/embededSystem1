@@ -1,0 +1,24 @@
+package com.example.embededSystem1;
+
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.webkit.WebView;
+
+public class Activity_camera extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.loadUrl("http://192.168.137.158:8000/index.html");
+    }
+
+}
