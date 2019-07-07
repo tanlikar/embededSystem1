@@ -31,10 +31,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DatabaseReference mDatabaseReference;
-    private Query generalQuery;
     private ArrayList<Data_struct> mDataTemp = new ArrayList<>();
     private ArrayList<Data_struct> mDataHumi = new ArrayList<>();
+    private ArrayList<Data_struct> mDataMoist = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +51,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        TextView disMoist = (TextView) findViewById(R.id.text_moist);
-
-
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
-        mDatabaseReference.child("Temperature").limitToLast(1).addChildEventListener(new ChildEventListener() {
+        databaseReference.child("Temperature").limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists()) {
@@ -89,14 +85,46 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        mDatabaseReference.child("Humidity").limitToLast(1).addChildEventListener(new ChildEventListener() {
+        databaseReference.child("Humidity").limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists()) {
 
                     TextView disHumi = (TextView) findViewById(R.id.text_humi);
                     mDataHumi.add(dataSnapshot.getValue(Data_struct.class));
-                    disHumi.setText(String.format("%s", mDataHumi.get(mDataHumi.size() - 1).getData().toString()));
+                    disHumi.setText(String.format("%s %%", mDataHumi.get(mDataHumi.size() - 1).getData().toString()));
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.child("Soil Moisture").limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                if(dataSnapshot.exists()) {
+
+                    TextView disMoist = (TextView) findViewById(R.id.text_moist);
+                    mDataMoist.add(dataSnapshot.getValue(Data_struct.class));
+                    disMoist.setText(String.format("%s %%", mDataMoist.get(mDataMoist.size() - 1).getData().toString()));
                 }
             }
 
