@@ -25,4 +25,9 @@
     <string name="title_activity_chart">Activity_chart</string>
     <string name="title_activity_chart_selection">chartSelection</string>
     <string name="title_activity_camera">Activity_camera</string>
+    <string name="title_activity_control">Activity_control</string>
+    <string name="moisture_threshold">Moisture Threshold (%)</string>
+    <string name="water_now">Water Now !</string>
+    <string name="_0">0</string>
+    <string name="watering_threshold">Watering Threshold(%)</string>
 </resources>
