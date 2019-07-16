@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity
                     TextView disMoist = (TextView) findViewById(R.id.text_moist);
                     mDataMoist.add(dataSnapshot.getValue(Data_struct.class));
                     disMoist.setText(String.format("%s %%", mDataMoist.get(mDataMoist.size() - 1).getData().toString()));
+                    Log.d("MOIST", "onChildAdded: " + mDataMoist.get(mDataMoist.size() - 1).getData().toString());
                 }
             }
 

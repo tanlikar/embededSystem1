@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.spec.ECField;
 import java.util.Objects;
 
 public class Activity_control extends AppCompatActivity {
@@ -110,9 +111,13 @@ public class Activity_control extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressValueMoist = (long)dataSnapshot.getValue();
-                mTextViewMoist.setText(progressValueMoist.toString());
-                mSeekBarMoist.setProgress(progressValueMoist.intValue());
+                try {
+                    progressValueMoist = (long) dataSnapshot.getValue();
+                    mTextViewMoist.setText(progressValueMoist.toString());
+                    mSeekBarMoist.setProgress(progressValueMoist.intValue());
+                }catch(Exception ignored){
+
+                }
             }
 
             @Override
@@ -125,9 +130,13 @@ public class Activity_control extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
                     progressValueWater = (long) dataSnapshot.getValue();
                     mTextViewWater.setText(progressValueWater.toString());
                     mSeekBarWater.setProgress(progressValueWater.intValue());
+                }catch (Exception ignore){
+
+                }
 
             }
 
